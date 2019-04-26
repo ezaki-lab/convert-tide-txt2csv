@@ -17,19 +17,11 @@ def txt2array(txt_file):
     txt_line_array = []
 
     for line in txt_file:
-        line_split = line.split(' ')
-        # 1日~9日 → 01日~09日
-        if len(line_split[1]) < 3:
-            line_split[1] = str(line_split[1]) + "0" + str(line_split[2])
-        # 1月~9月 → 01月~09月
-        if int(line_split[1][0]) < 10:
-            line_split[1] = "0" + line_split[1]
-
-        tides_txt_line = line_split[0][:72]
+        tides_txt_line = line[:72]
         tides = [tides_txt_line[i:i+3] for i in range(0, len(tides_txt_line), 3)]
-        year  = line_split[0][72:]
-        month = line_split[1][:2]
-        day   = line_split[1][2:4]
+        year  = line[72:74]
+        month = line[74:76]
+        day   = line[76:78]
 
         txt_line_array.append([year]+[month]+[day]+tides)
     
