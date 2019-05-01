@@ -7,7 +7,7 @@ import argparse
 def save_csv(array, csv_file_name):
     with open(csv_file_name, mode='w') as converted_file:
         csvwriter = csv.writer(converted_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        columnTitleRow = ["year","month","day","0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23"]
+        columnTitleRow = ["year","month","day","hour","tide"]
         csvwriter.writerow(columnTitleRow)
         for line in array:
             csvwriter.writerow(line)
@@ -18,12 +18,13 @@ def txt2array(txt_file):
 
     for line in txt_file:
         tides_txt_line = line[:72]
-        tides = [tides_txt_line[i:i+3] for i in range(0, len(tides_txt_line), 3)]
         year  = line[72:74]
         month = line[74:76]
         day   = line[76:78]
-
-        txt_line_array.append([year]+[month]+[day]+tides)
+        for i in range(24):
+            hour  = i
+            tide = tides_txt_line[i*3:i*3+3]
+            txt_line_array.append([year]+[month]+[day]+[hour]+[tide])
     
     return txt_line_array
 
