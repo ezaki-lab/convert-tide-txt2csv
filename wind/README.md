@@ -3,7 +3,7 @@
 ## 使い方
 
 ```
-$ python convert-wind-csv2csv.py -i /Users/kaito/Downloads/wind.txt
+$ python convert-wind-csv2csv.py -i /Users/kaito/Downloads/wind.csv
 ```
 
 ## フォーマット
