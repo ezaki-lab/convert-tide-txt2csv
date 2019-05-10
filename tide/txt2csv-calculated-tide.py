@@ -3,6 +3,9 @@ import sys
 import csv
 import argparse
 
+import tideFormatter
+
+
 # 配列をcsvに保存
 def save_csv(array, csv_file_name):
     with open(csv_file_name, mode='w') as converted_file:
@@ -23,8 +26,9 @@ def txt2array(txt_file):
         day   = line[76:78]
         for i in range(24):
             hour  = i
-            tide = tides_txt_line[i*3:i*3+3]
-            txt_line_array.append([year]+[month]+[day]+[hour]+[tide])
+            tide = int(tides_txt_line[i*3:i*3+3])
+            baseTide = tideFormatter.calculateToBase(tide)
+            txt_line_array.append([year]+[month]+[day]+[hour]+[baseTide])
     
     return txt_line_array
 
